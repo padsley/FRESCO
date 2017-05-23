@@ -1,0 +1,48 @@
+DWBA d(Rb75,t)Rb74;
+NAMELIST
+ &FRESCO hcm=0.03 rmatch=40 rintp=0.20 hnl=0.1 rnl=8.00 centre=0.68
+	 jtmin=0.0  jtmax=120 absend=-1.0
+	 thmin=0.00 thmax=40.00 thinc=0.10
+	 iter=1 nnu=36
+	 chans=1 xstabl=1 
+	 elab=450.0  /
+
+ &PARTITION namep='Rb75' massp=75.0  zp=37 namet='d' masst=2.00185 zt=1 qval=0.0000 nex=1 /
+ &STATES jp=1.5 bandp=-1 cpot=1 jt=1.0 bandt=1 et=0.000 /
+ 
+ &PARTITION namep='Rb74' massp=74.0 zp=37 namet='t' masst=3.00857 zt=1 qval=-7.648 nex=4 /
+ &STATES jp=0. bandp=1 ep=0.000 cpot=2 jt=0.5 bandt=1 et=0.000 /
+ &STATES jp=2. bandp=1 ep=0.478 cpot=2 copyt=1 /
+ &STATES jp=0. bandp=1 ep=0.520 cpot=2 copyt=1 /
+ &STATES jp=0. bandp=1 ep=1.000 cpot=2 copyt=1 /
+ &partition /
+
+ &POT kp=1 ap=75.00 at=2. rc=1.3 / !Optical potl of the entrance channel 75Rb+d Haixia An + Chonghai Cai
+ &POT kp=1 type=1 p1=95.5 p2=1.15 p3=0.77 p4=1.6 p5=1.33 p6=0.43 / !Volume term
+ &POT kp=1 type=2 p1=10.6 p2=1.37 p3=0.79 / !Surface interaction
+ &POT kp=1 type=4 p1=3.6 p2=0.97 p3=1.01 / !Spin-orbit type=4<- In the target
+ &POT kp=2 ap=74.00 at=3. rc=1.3 / !Optical potl of the exit channel 74Rb+t Becchetti + Greenlees
+ &POT kp=2 type=1 p1=163.0 p2=1.2 p3=0.72 p4=42.0 p5=1.4 p6=0.84 /
+ &POT kp=2 type=4 p1=2.5 p2=1.2 p3=0.72 /
+ &POT kp=3 ap=74.00 at=0. rc=1.3 /!Binding potential of the outer neutron in 75Rb
+ &POT kp=3 type=1 p1=63.7 p2=1.22 p3=0.69 /
+ &POT kp=3 type=4 p1=5.7 p2=1.1 p3=0.56 /
+ &POT kp=4 ap=0 at=2 rc=1.4 / !Binding Potential of Outer Neutron in 3H
+ &POT kp=4 type=1 p1=87.3 p2=0.95 p3=0.65 /
+ &POT kp=5 ap=74.00 at=2.00 rc=1.3 /
+ &POT kp=5 type=1 p1=95.5 p2=1.15 p3=0.77 p4=1.6 p5=1.33 p6=0.44 / !Core-core 74Rb-d optical model potential
+ &POT kp=5 type=2 p1=10.6 p2=1.37 p3=0.79 / !Surface interaction
+ &POT kp=5 type=3 p1=3.6 p2=0.97 p3=1.01 /
+ &pot /
+
+ &OVERLAP kn1=1 ic1=2 ic2=1 in=2 nn=1 l=0 sn=0.5 j=0.5 kbpot=4 be=6.26 isc=1 / !Overlap of the outer neutron in 3H. isc=1 so the central part of the potential is adjusted to give the correct BE
+ &OVERLAP kn1=2 ic1=1 ic2=2 in=1 nn=2 l=1 sn=0.5 j=1.5 kbpot=3 be=1.0 isc=1 / !Overlap of the outer neutron in 75Rb. Again, adjust the central part of the potential
+ &overlap /
+
+ &COUPLING icfrom=1 icto=-2 kind=7 ip1=0 ip2=-1 ip3=5 /
+ &CFP in=2 ib=1 ia=1 kn=1 a=1.00 /
+ &CFP in=1 ib=1 ia=1 kn=2 a=1.00 /!kn=2 to the n+74Rb coupling, which is in the projectile
+ &CFP in=1 ib=1 ia=2 kn=2 a=1.00 /!kn=2 to the n+74Rb coupling, in the projectile. Coupling the g.s. of the 75Rb to the 2+ state in 74Rb
+ &CFP in=1 ib=1 ia=3 kn=2 a=1.00 /!kn=2, for the other coupling
+ &CFP in=1 ib=1 ia=4 kn=2 a=1.00 /!kn=2, for yet another coupling
+ &coupling /
